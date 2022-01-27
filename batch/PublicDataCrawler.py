@@ -1,8 +1,8 @@
+import mysql.connector
 import requests
 from XmlParser import XmlParser
 from ConfigManager import ConfigManager
 from furl import furl
-import mysql.connector
 
 class PublicDataCrawler:
     def __init__(self, config, url='http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTrade'):

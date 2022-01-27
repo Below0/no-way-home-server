@@ -1,6 +1,6 @@
+import mysql.connector
 from openpyxl import load_workbook
 from openpyxl.descriptors.serialisable import KEYWORDS
-import mysql.connector
 from ConfigManager import ConfigManager
 
 

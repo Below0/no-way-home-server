@@ -6,8 +6,8 @@ import mysql.connector
 import json
 
 SQL_APT_UPSERT = """
-    INSERT INTO apt_info (apt_name, address, lat_lon, avg_price)
-    VALUES (%s, %s, ST_GeomFromText('POINT(%s %s)'), %s)
+    INSERT INTO apt_info (apt_name, address, lat_lon, avg_price, updated_date)
+    VALUES (%s, %s, ST_GeomFromText('POINT(%s %s)'), %s, NOW())
     ON DUPLICATE KEY UPDATE address=%s
 """
 
@@ -80,7 +80,7 @@ def run(date_id = '202101', hcode = '11200'):
         apts.append(apt_info)
 
     for apt in apts:
-         cursor.execute(SQL_APT_UPSERT, apt)
+        cursor.execute(SQL_APT_UPSERT, apt)
 
     db.commit()
 

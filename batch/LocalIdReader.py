@@ -27,4 +27,23 @@ for simple_id, id, dep1, dep2, dep3 in rows:
 
 cursor.executemany(SQL, insert_values)
 db.commit()
-print(cursor.rowcount, "was inserted.")
+print(cursor.rowcount, "was inserted in full_region_info.")
+
+SQL = "INSERT INTO region_info (id, region, city) VALUES (%s, %s, %s)"
+
+workbook = load_workbook("./simple_hcode_list.xlsx", data_only=True)
+sheet = workbook['list']
+rows = sheet.rows
+
+insert_values = []
+for region, city, id in rows:
+  if region.value is None:
+    continue
+  insert_values.append([id.value, region.value, city.value])
+
+print(insert_values)
+
+cursor.executemany(SQL, insert_values)
+db.commit()
+print(cursor.rowcount, "was inserted in region_info.")
+

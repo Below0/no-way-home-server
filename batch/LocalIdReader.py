@@ -3,14 +3,13 @@ from openpyxl import load_workbook
 from openpyxl.descriptors.serialisable import KEYWORDS
 from ConfigManager import ConfigManager
 
-
 db_config = ConfigManager.get_config("db")
 
 db = mysql.connector.connect(
-  host=db_config["host"],
-  user=db_config["user"],
-  password=db_config["password"],
-  database=db_config["db"]
+    host=db_config["host"],
+    user=db_config["user"],
+    password=db_config["password"],
+    database=db_config["db"]
 )
 
 cursor = db.cursor()
@@ -23,7 +22,7 @@ rows = sheet.rows
 
 insert_values = []
 for simple_id, id, dep1, dep2, dep3 in rows:
-  insert_values.append([id.value, simple_id.value, dep1.value, dep2.value, dep3.value])
+    insert_values.append([id.value, simple_id.value, dep1.value, dep2.value, dep3.value])
 
 cursor.executemany(SQL, insert_values)
 db.commit()
@@ -37,13 +36,10 @@ rows = sheet.rows
 
 insert_values = []
 for region, city, id in rows:
-  if region.value is None:
-    continue
-  insert_values.append([id.value, region.value, city.value])
-
-print(insert_values)
+    if region.value is None:
+        continue
+    insert_values.append([id.value, region.value, city.value])
 
 cursor.executemany(SQL, insert_values)
 db.commit()
 print(cursor.rowcount, "was inserted in region_info.")
-

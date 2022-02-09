@@ -43,6 +43,7 @@ def run(date_id='202101', city_name='서울특별시'):
     xml_parser = XmlParser()
 
     for hcode in simple_hcodes:
+        print(f"Update hcode : {hcode}")
         res = crawler.run(date_id=date_id, region=hcode)
         items = xml_parser.parse(res, ['거래금액', '아파트', '지번', '법정동'])
 
@@ -58,11 +59,8 @@ def run(date_id='202101', city_name='서울특별시'):
             total_price = apt_price_accumulator.get(key, 0)
             apt_price_accumulator[key] = total_price + int(item["거래금액"].replace(",", ""))
 
-        print(apt_price_accumulator)
-
         hm = HcodeManager(db_config)
         full_hcode_dict = hm.get_hcodes(hcode)
-        print(full_hcode_dict)
 
         gc = NaverGeoCoder(naver_config)
 
@@ -96,6 +94,4 @@ def run(date_id='202101', city_name='서울특별시'):
 
 if __name__ == "__main__":
     city_name = sys.argv[1]
-    print(city_name)
-
-    run();
+    run(city_name)

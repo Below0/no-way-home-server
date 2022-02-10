@@ -7,6 +7,8 @@ plugins {
 group = 'com.haraorum'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+apply plugin: 'spring-boot'
+springBoot { executable = true }
 
 configurations {
 	compileOnly {

@@ -93,5 +93,10 @@ def run(date_id='202101', city_name='서울특별시'):
 
 
 if __name__ == "__main__":
-    city_name = sys.argv[1]
-    run(city_name)
+    date_id = sys.argv[1]
+    city_name = sys.argv[2]
+
+    run(
+        date_id=date_id,
+        city_name=city_name
+    )
